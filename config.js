@@ -272,7 +272,7 @@ var CONFIG = {
                         {
                             position: [1, 0],
                             type: TYPES.LIGHT,
-                            id: 'light.sonoff_kitchen_led',
+                            id: 'light.led_kitchen_led',
                             title: 'Arbeitslicht',
                             subtitle: 'Küche',
                             states: {
