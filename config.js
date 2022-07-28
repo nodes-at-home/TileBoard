@@ -206,9 +206,26 @@ var CONFIG = {
                             }
                         },
                         {
-                            classes: ['sbahn-traffic'],
                             position: [1, 1],
-                            width: 3,
+                            type: TYPES.SENSOR_ICON,
+                            id: 'binary_sensor.wasserampel',
+                            icons:
+                                function ( item, entity ) {
+                                    return entity.attributes.icon.replace ( "mdi:", "mdi-" );
+                                },
+                            state: '@attributes.text',
+                            customStyles:
+                                function ( item, entity ) {
+                                    return {
+                                        'animation-name': 'none',
+                                        'background-color': entity.attributes.icon_color,
+                                    }
+                                }
+                        },
+                        {
+                            classes: ['sbahn-traffic'],
+                            position: [2, 1],
+                            width: 2,
                             height: 1,
                             title: 'S-Bahn',
                             id: {}, // since we are binding each list item to different sensor, so we simply use an empty object
