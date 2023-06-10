@@ -155,7 +155,7 @@ var CONFIG = {
                                 humidity: '&sensor.openweathermap_humidity.state',
                                 humidityUnit: '&sensor.openweathermap_humidity.attributes.unit_of_measurement',
                                 windSpeed: '&sensor.openweathermap_wind_speed.state',
-                                windSpeedUnit: 'kmh',                               
+                                windSpeedUnit: 'km/h',
                                 list: [
                                     'Luftdruck '
                                     + '&sensor.openweathermap_pressure.state'
@@ -223,20 +223,76 @@ var CONFIG = {
                                 }
                         },
                         {
-                            classes: ['sbahn-traffic'],
                             position: [2, 1],
-                            width: 2,
-                            height: 1,
-                            title: 'S-Bahn',
-                            id: {}, // since we are binding each list item to different sensor, so we simply use an empty object
-                            type: TYPES.TEXT_LIST,
+                            type: TYPES.GAUGE,
+                            title: 'Solarproduktion',
+                            id: 'sensor.total_dc_power',
+                            value: function ( item, entity ) {
+                                return entity.state.replace ( ",", "." );
+                            },
                             state: false,
-                            list: [
-                                { value: ' ' },
-                                { value: '&sensor.traffic_sbahn_1.state' },
-                                { value: ' ' },
-                                { value: '&sensor.traffic_sbahn_2.state' }
-                            ]
+                            settings: {
+                                size: 140,                                                          // Defaults to 50% of either height or width, whichever is smaller
+                                type: 'arch',                                                       // Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
+                                min: 0,                                                             // Defaults to 0
+                                max: 15000,                                                         // Defaults to 100, TODO read input_number.
+                                cap: 'round',                                                       // Options are: 'round', 'butt'. Defaults to 'butt'
+                                thick: 10,                                                           // Defaults to 6
+                                // label: 'Solarproduktion',                                           // Defaults to undefined
+                                append: '@attributes.unit_of_measurement',                          // Defaults to undefined
+                                // prepend: '$',                                                       // Defaults to undefined
+                                duration: 1500,                                                     // Defaults to 1500ms
+                                // thresholds: { 0: { color: 'green'}, 80: { color: 'red' } },         // Defaults to undefined
+                                labelOnly: false,                                                   // Defaults to false
+                                // foregroundColor: 'rgba(0, 150, 136, 1)',                            // Defaults to rgba(0, 150, 136, 1)
+                                // backgroundColor: 'rgba(0, 0, 0, 0.1)',                              // Defaults to rgba(0, 0, 0, 0.1)
+                                fractionSize: 0,                                                    // Number of decimal places to round the number to. Defaults to current locale formatting
+                            },
+                            // icons:
+                                // function ( item, entity ) {
+                                    // return entity.attributes.icon.replace ( "mdi:", "mdi-" );
+                                // },
+                            // state: '@attributes.text',
+                            // customStyles:
+                                // function ( item, entity ) {
+                                    // return {
+                                        // 'animation-name': 'none',
+                                        // 'background-color': entity.attributes.icon_color,
+                                    // }
+                                // }
+                        },
+                        {
+                            position: [3, 1],
+                            type: TYPES.SENSOR_ICON,
+                            id: 'binary_sensor.battery_state',
+                            icons:
+                                function ( item, entity ) {
+                                    return entity.attributes.icon.replace ( "mdi:", "mdi-" );
+                                },
+                            state: '@attributes.level',
+                            customStyles:
+                                function ( item, entity ) {
+                                    return {
+                                        'animation-name': 'none',
+                                        'background-color': entity.attributes.icon_color,
+                                    }
+                                }
+                        // },
+                        // {
+                            // classes: ['sbahn-traffic'],
+                            // position: [2, 1],
+                            // width: 2,
+                            // height: 1,
+                            // title: 'S-Bahn',
+                            // id: {}, // since we are binding each list item to different sensor, so we simply use an empty object
+                            // type: TYPES.TEXT_LIST,
+                            // state: false,
+                            // list: [
+                                // { value: ' ' },
+                                // { value: '&sensor.traffic_sbahn_1.state' },
+                                // { value: ' ' },
+                                // { value: '&sensor.traffic_sbahn_2.state' }
+                            // ]
                         }                 
                     ]
                 }
@@ -436,7 +492,7 @@ var CONFIG = {
             ]
         },
         {
-            hidden: false,
+            hidden: true,
             //title: 'Saugroboter',
             bg: 'images/bg2.png',
             icon: 'mdi-robot-vacuum',
