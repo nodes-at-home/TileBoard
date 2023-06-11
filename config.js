@@ -227,10 +227,10 @@ var CONFIG = {
                             type: TYPES.GAUGE,
                             title: 'Solarproduktion',
                             id: 'sensor.total_dc_power',
-                            value: function ( item, entity ) {
-                                return entity.state.replace ( ",", "." );
-                            },
-                            state: false,
+                            // value: function ( item, entity ) {
+                                // return entity.state.replace ( ",", "." );
+                            // },
+                            state: '&sensor.solar_meter_daily.state &sensor.solar_meter_daily.attributes.unit_of_measurement',
                             settings: {
                                 size: 140,                                                          // Defaults to 50% of either height or width, whichever is smaller
                                 type: 'arch',                                                       // Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
@@ -253,18 +253,6 @@ var CONFIG = {
                                 // backgroundColor: 'rgba(0, 0, 0, 0.1)',                              // Defaults to rgba(0, 0, 0, 0.1)
                                 fractionSize: 0,                                                    // Number of decimal places to round the number to. Defaults to current locale formatting
                             },
-                            // icons:
-                                // function ( item, entity ) {
-                                    // return entity.attributes.icon.replace ( "mdi:", "mdi-" );
-                                // },
-                            // state: '@attributes.text',
-                            // customStyles:
-                                // function ( item, entity ) {
-                                    // return {
-                                        // 'animation-name': 'none',
-                                        // 'background-color': entity.attributes.icon_color,
-                                    // }
-                                // }
                         },
                         {
                             position: [3, 1],
@@ -354,8 +342,8 @@ var CONFIG = {
                             title: 'Arbeitslicht',
                             subtitle: 'Küche',
                             states: {
-                                on: "On",
-                                off: "Off"
+                                on: "An",
+                                off: "Aus"
                             },
                             icons: {
                                 on: "mdi-lightbulb-on",
@@ -398,8 +386,8 @@ var CONFIG = {
                             title: 'Staubsaugen',
                             subtitle: 'Einstellung',
                             states: {
-                                on: "On",
-                                off: "Off"
+                                on: "An",
+                                off: "Aus"
                             },
                             icons: {
                                 on: "mdi-robot-vacuum",
@@ -413,8 +401,8 @@ var CONFIG = {
                             title: 'Pool',
                             subtitle: 'Garten',
                             states: {
-                                on: "On",
-                                off: "Off"
+                                on: "An",
+                                off: "Aus"
                             },
                             icons: {
                                 on: "mdi-pool",
@@ -426,10 +414,10 @@ var CONFIG = {
                             type: TYPES.SWITCH,
                             id: 'switch.sonoff_k8200_socket',
                             title: 'K8200',
-                            subtitle: 'Wohnzimmer',
+                            subtitle: 'Büro',
                             states: {
-                                on: "On",
-                                off: "Off"
+                                on: "An",
+                                off: "Aus"
                             },
                             icons: {
                                 on: "mdi-printer-3d",
@@ -443,8 +431,8 @@ var CONFIG = {
                             title: 'Lichtsimulation',
                             subtitle: 'Einstellung',
                             states: {
-                                on: "On",
-                                off: "Off"
+                                on: "An",
+                                off: "Aus"
                             },
                             icons: {
                                 on: "mdi-dip-switch",
@@ -460,7 +448,7 @@ var CONFIG = {
             // title: 'Wettervorhersage',
             bg: 'images/bg2.png',
             icon: 'mdi-weather-partly-rainy',
-            styles: {
+                styles: {
                 padding: '75px 0px'
             },
             groups: [
